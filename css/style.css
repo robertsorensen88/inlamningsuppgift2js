@@ -1,0 +1,46 @@
+.logo{
+    width: 10%;
+    height: 10%;
+}
+.headerflex{
+    display: flex;
+    height: 60px;
+    gap: 20px;
+}
+header{
+    padding-left: 50px;
+}
+header h3{
+    padding-left: 100px;
+}
+.navflex{
+    background-color: darkslategray;
+    
+}
+.navflex form{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+}
+.btn-outline-success {
+    color: cyan;
+    border-color: cyan;
+}
+.btn-outline-success:hover {
+    background-color: cyan;
+    color: darkslategray;
+}
+
+.form-control:focus {
+    color: #000000;
+    background-color: #fff;
+    border-color: cyan;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(2, 252, 252, 1);
+}
+footer{
+    text-align: center;
+    color: cyan;
+    background-color: darkslategray;
+}
