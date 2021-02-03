@@ -1,46 +1,73 @@
-.logo{
-    width: 10%;
-    height: 10%;
+.logo {
+  width: 10%;
+  height: 10%;
 }
-.headerflex{
-    display: flex;
-    height: 60px;
-    gap: 20px;
+.headerflex {
+  display: flex;
+  height: 60px;
+  gap: 20px;
 }
-header{
-    padding-left: 50px;
+header {
+  padding-left: 50px;
 }
-header h3{
-    padding-left: 100px;
+.navflex {
+  border-bottom: 5px solid darkslategray;
+  border-top: darkslategray 5px solid;
 }
-.navflex{
-    background-color: darkslategray;
-    
-}
-.navflex form{
-    width: 30%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 15px;
+.navflex form {
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
 }
 .btn-outline-success {
-    color: cyan;
-    border-color: cyan;
+  color: darkslategray;
+  border-color: darkslategray;
 }
 .btn-outline-success:hover {
-    background-color: cyan;
-    color: darkslategray;
+  background-color: lightgray;
+  color: darkslategray;
 }
-
+.btn-outline-success:active:focus {
+  box-shadow: 0;
+}
+.btn-outline-success:active {
+  color: #000000;
+  background-color: darkgray;
+  border-color: darkslategray;
+}
 .form-control:focus {
-    color: #000000;
-    background-color: #fff;
-    border-color: cyan;
-    outline: 0;
-    box-shadow: 0 0 0 0.1rem rgba(2, 252, 252, 1);
+  color: #000000;
+  background-color: darkgray;
+  border-color: darkslategray;
+  outline: 0;
 }
-footer{
-    text-align: center;
-    color: cyan;
-    background-color: darkslategray;
+.form-control{
+    min-width: 200px;
+}
+.weathercontainer div {
+  margin-right: auto;
+  margin-left: auto;
+}
+.weathercontainer{
+    display: flex;
+    padding: 50px;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+.contentcontainer {
+  display: flex;
+  padding: 50px;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+.contentcontainer div {
+  margin-right: auto;
+  margin-left: auto;
+}
+footer {
+  text-align: center;
+  padding: 10px;
+  border-top: 5px solid darkslategray;
+  border-bottom: 5px solid darkslategray;
 }
