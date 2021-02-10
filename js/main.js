@@ -30,6 +30,10 @@ button.addEventListener("click", function () {
         weatherOutput.appendChild(desc);
       } else {
         alert("Press weather checkbox to get weather information.");
+        cityName.innerHTML = city;
+        weatherOutput.appendChild(cityName);
+        weatherOutput.removeChild(temp);
+        weatherOutput.removeChild(desc)
       }
     })
     .catch((err) => alert("There is no city like that!"));
