@@ -1,5 +1,8 @@
 let button = document.querySelector("#btn");
 let inputValue = document.querySelector("#inputValue");
+
+let checkboxWeather = document.querySelector("#weather");
+
 let cityName = document.querySelector(".name");
 let temp = document.querySelector(".temp");
 let desc = document.querySelector(".desc");
@@ -17,13 +20,17 @@ button.addEventListener("click", function () {
       let tempValue = data["main"]["temp"];
       let description = data["weather"][0]["description"];
 
-      cityName.innerHTML = city;
-      temp.innerHTML = tempValue + " °C";
-      desc.innerHTML = description;
+      if (checkboxWeather.checked === true) {
+        cityName.innerHTML = city;
+        temp.innerHTML = tempValue + " °C";
+        desc.innerHTML = description;
 
-      weatherOutput.appendChild(cityName);
-      weatherOutput.appendChild(temp);
-      weatherOutput.appendChild(desc);
+        weatherOutput.appendChild(cityName);
+        weatherOutput.appendChild(temp);
+        weatherOutput.appendChild(desc);
+      } else {
+        alert("Press weather checkbox to get weather information.");
+      }
     })
     .catch((err) => alert("There is no city like that!"));
 });
