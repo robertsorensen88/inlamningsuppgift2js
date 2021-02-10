@@ -6,6 +6,7 @@ let checkboxWeather = document.querySelector("#weather");
 let cityName = document.querySelector(".name");
 let temp = document.querySelector(".temp");
 let desc = document.querySelector(".desc");
+let imgicon = document.querySelector(".icon");
 let weatherOutput = document.querySelector(".weatherOutput");
 
 button.addEventListener("click", function () {
@@ -19,12 +20,16 @@ button.addEventListener("click", function () {
       let city = data["name"];
       let tempValue = data["main"]["temp"];
       let description = data["weather"][0]["description"];
+      let icon = data["weather"][0]["icon"];
+      var iconurl = "http://openweathermap.org/img/w/" + icon + ".png";
 
       if (checkboxWeather.checked === true) {
         cityName.innerHTML = city;
         temp.innerHTML = tempValue + " °C";
         desc.innerHTML = description;
+        imgicon.src = iconurl;
 
+        weatherOutput.appendChild(imgicon);
         weatherOutput.appendChild(cityName);
         weatherOutput.appendChild(temp);
         weatherOutput.appendChild(desc);
@@ -33,7 +38,8 @@ button.addEventListener("click", function () {
         cityName.innerHTML = city;
         weatherOutput.appendChild(cityName);
         weatherOutput.removeChild(temp);
-        weatherOutput.removeChild(desc)
+        weatherOutput.removeChild(desc);
+
       }
     })
     .catch((err) => alert("There is no city like that!"));

@@ -57,7 +57,7 @@ main {
   border: 2px solid lightslategray;
   border-radius: 5px;
 }
-.weatherOutput *{
+.weatherOutput p, .weatherOutput h2{
   border-bottom:dashed 1px  black;
   margin: 5px;
 }
