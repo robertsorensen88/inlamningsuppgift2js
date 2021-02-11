@@ -61,3 +61,24 @@ main {
   border-bottom:dashed 1px  black;
   margin: 5px;
 }
+.attr {
+  display: flex;
+  flex-wrap: wrap;
+  border: 2px solid lightslategray;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+}
+#attractions{
+  margin-top: 10px;
+  text-align: center;
+  padding-top: 35px;
+  margin-left: 50px;
+  margin-right: 50px;
+  flex: 25%;
+  width: 300px;
+  height: 100px;
+  text-transform: capitalize;
+  border: 2px solid lightslategray;
+  border-radius: 5px;
+}
