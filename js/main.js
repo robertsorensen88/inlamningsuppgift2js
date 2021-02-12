@@ -3,6 +3,7 @@ let inputValue = document.querySelector("#inputValue");
 
 let checkboxWeather = document.querySelector("#weather");
 let checkboxattr = document.querySelector("#attraction");
+let checkboxSort = document.querySelector("#sort");
 
 let maincontent = document.querySelector(".content");
 
@@ -86,36 +87,82 @@ button.addEventListener("click", function () {
   if (checkboxattr.checked === true) {
     venueRequest.onload = function () {
       const venues = venueRequest.response.response.groups[0].items;
-      
 
       let attrOutput = document.createElement("div");
       attrOutput.className = "attr";
       let attrHeader = document.createElement("h1");
       attrHeader.id = "hId";
       attrHeader.innerHTML = "Attractions";
-
+      let sortVenue = [];
       for (let i = 0; i < 10; i++) {
-        let venuePick = venues[i].venue;
-        let venueIcon = venues[i].venue.categories[0].icon.prefix + "32.png";;
-        let venueAddress = venues[i].venue.location;
+        sortVenue[i] = {
+          Namn: venues[i].venue.name,
+          Icon: venues[i].venue.categories[0].icon.prefix + "32.png",
+          Address: venues[i].venue.location,
+        };
+        console.log(sortVenue[i]);
+      }
+      if (checkboxSort.checked === true) {
+        sortVenue.sort(function (a, b) {
+          var x = a.Namn.toLowerCase();
+          var y = b.Namn.toLowerCase();
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        });
+        console.log(sortVenue);
 
-        let img = document.createElement("img");
-        let div = document.createElement("div");
-        let attractions = document.createElement("h4");
-        let address = document.createElement("p");
+        for (let i = 0; i < 10; i++) {
+          let venuePick = sortVenue[i].Namn;
+          let venueIcon = sortVenue[i].Icon;
+          let venueAddress = sortVenue[i].Address;
 
-        img.src = venueIcon;
-        div.id = "attractions";
-        address.innerHTML = "<br>Address: <br>" + venueAddress.address;
-        attractions.innerHTML = venuePick.name;
+          let img = document.createElement("img");
+          let div = document.createElement("div");
+          let attractions = document.createElement("h4");
+          let address = document.createElement("p");
 
-        maincontent.appendChild(attrHeader);
-        div.appendChild(img);
-        div.appendChild(attractions);
-        div.appendChild(address)
-        attrOutput.appendChild(div);
-        maincontent.appendChild(attrOutput);
-        console.log(`${venuePick.name}`);
+          img.src = venueIcon;
+          div.id = "attractions";
+          address.innerHTML = "<br>Address: <br>" + venueAddress.address;
+          attractions.innerHTML = sortVenue[i].Namn;
+
+          maincontent.appendChild(attrHeader);
+          div.appendChild(img);
+          div.appendChild(attractions);
+          div.appendChild(address);
+          attrOutput.appendChild(div);
+          maincontent.appendChild(attrOutput);
+          console.log(`${venuePick.name}`);
+        }
+      } else {
+        for (let i = 0; i < 10; i++) {
+          let venuePick = venues[i].venue;
+          let venueIcon = venues[i].venue.categories[0].icon.prefix + "32.png";
+          let venueAddress = venues[i].venue.location;
+
+          let img = document.createElement("img");
+          let div = document.createElement("div");
+          let attractions = document.createElement("h4");
+          let address = document.createElement("p");
+
+          img.src = venueIcon;
+          div.id = "attractions";
+          address.innerHTML = "<br>Address: <br>" + venueAddress.address;
+          attractions.innerHTML = venuePick.name;
+
+          maincontent.appendChild(attrHeader);
+          div.appendChild(img);
+          div.appendChild(attractions);
+          div.appendChild(address);
+          attrOutput.appendChild(div);
+          maincontent.appendChild(attrOutput);
+          console.log(`${venuePick.name}`);
+        }
       }
     };
     venueRequest.send();
@@ -125,6 +172,12 @@ button.addEventListener("click", function () {
     let removeAttrOutput = document.querySelector(".attr");
     maincontent.removeChild(removeAttrOutput);
     maincontent.removeChild(removeAttrHeader);
+  }
+});
+
+checkboxSort.addEventListener("click", function () {
+  if (checkboxSort.checked === true) {
+    checkboxattr.checked = true;
   }
 });
 
