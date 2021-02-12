@@ -97,7 +97,7 @@ button.addEventListener("click", function () {
       for (let i = 0; i < 10; i++) {
         sortVenue[i] = {
           Namn: venues[i].venue.name,
-          Icon: venues[i].venue.categories[0].icon.prefix + "32.png",
+          Icon: venues[i].venue.categories[0].icon.prefix + "bg_32.png",
           Address: venues[i].venue.location,
         };
         console.log(sortVenue[i]);
@@ -142,7 +142,7 @@ button.addEventListener("click", function () {
       } else {
         for (let i = 0; i < 10; i++) {
           let venuePick = venues[i].venue;
-          let venueIcon = venues[i].venue.categories[0].icon.prefix + "32.png";
+          let venueIcon = venues[i].venue.categories[0].icon.prefix + "bg_32.png";
           let venueAddress = venues[i].venue.location;
 
           let img = document.createElement("img");
