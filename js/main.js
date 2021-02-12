@@ -86,6 +86,7 @@ button.addEventListener("click", function () {
   if (checkboxattr.checked === true) {
     venueRequest.onload = function () {
       const venues = venueRequest.response.response.groups[0].items;
+      
 
       let attrOutput = document.createElement("div");
       attrOutput.className = "attr";
@@ -95,15 +96,23 @@ button.addEventListener("click", function () {
 
       for (let i = 0; i < 10; i++) {
         let venuePick = venues[i].venue;
+        let venueIcon = venues[i].venue.categories[0].icon.prefix + "32.png";;
+        let venueAddress = venues[i].venue.location;
 
+        let img = document.createElement("img");
         let div = document.createElement("div");
         let attractions = document.createElement("h4");
+        let address = document.createElement("p");
 
+        img.src = venueIcon;
         div.id = "attractions";
+        address.innerHTML = "<br>Address: <br>" + venueAddress.address;
         attractions.innerHTML = venuePick.name;
 
         maincontent.appendChild(attrHeader);
+        div.appendChild(img);
         div.appendChild(attractions);
+        div.appendChild(address)
         attrOutput.appendChild(div);
         maincontent.appendChild(attrOutput);
         console.log(`${venuePick.name}`);
