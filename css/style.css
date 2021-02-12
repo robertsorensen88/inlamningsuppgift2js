@@ -46,7 +46,7 @@ main {
   margin-top: 15px;
   text-align: center;
 }
-.weatherOutput {
+#weatherOutput {
   margin-top: 10px;
   text-align: center;
   padding: 10px;
@@ -57,7 +57,7 @@ main {
   border: 2px solid lightslategray;
   border-radius: 5px;
 }
-.weatherOutput p, .weatherOutput h2{
+#weatherOutput p, .weatherOutput h2{
   border-bottom:dashed 1px  black;
   margin: 5px;
 }
@@ -73,10 +73,11 @@ main {
   margin-top: 10px;
   text-align: center;
   padding-top: 35px;
-  margin-left: 50px;
-  margin-right: 50px;
-  flex: 25%;
-  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  flex: 30%;
+  max-width: 300px;
+  min-width: 250px;
   height: 100px;
   text-transform: capitalize;
   border: 2px solid lightslategray;

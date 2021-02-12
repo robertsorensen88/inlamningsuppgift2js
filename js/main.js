@@ -4,11 +4,7 @@ let inputValue = document.querySelector("#inputValue");
 let checkboxWeather = document.querySelector("#weather");
 let checkboxattr = document.querySelector("#attraction");
 
-let cityNames = document.querySelector(".name");
-let temp = document.querySelector(".temp");
-let desc = document.querySelector(".desc");
-let imgicon = document.querySelector(".icon");
-let weatherOutput = document.querySelector(".weatherOutput");
+let maincontent = document.querySelector(".content");
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, "0");
@@ -33,22 +29,38 @@ button.addEventListener("click", function () {
       var iconurl = "http://openweathermap.org/img/w/" + icon + ".png";
 
       if (checkboxWeather.checked === true) {
+        let weatherHeader = document.createElement("h1");
+        let cityNames = document.createElement("h2");
+        let temp = document.createElement("p");
+        let desc = document.createElement("p");
+        let imgicon = document.createElement("img");
+        let weatherOutput = document.createElement("div");
+
+        weatherHeader.id = "hId";
+        weatherHeader.innerHTML = "Weather";
+        weatherOutput.id = "weatherOutput";
+        cityName.id = "wId";
         cityNames.innerHTML = city;
+        temp.id = "tId";
         temp.innerHTML = tempValue + " °C";
+        desc.id = "dId";
         desc.innerHTML = description;
+        imgicon.id = "iID";
         imgicon.src = iconurl;
 
+        maincontent.appendChild(weatherHeader);
         weatherOutput.appendChild(imgicon);
         weatherOutput.appendChild(cityNames);
         weatherOutput.appendChild(temp);
         weatherOutput.appendChild(desc);
+        maincontent.appendChild(weatherOutput);
       } else {
         alert("Press weather checkbox to get weather information.");
-        cityNames.innerHTML = city;
-        weatherOutput.appendChild(cityNames);
-        weatherOutput.removeChild(imgicon);
-        weatherOutput.removeChild(temp);
-        weatherOutput.removeChild(desc);
+        let wHeader = document.querySelector("#whId");
+        let wContent = document.querySelector("#weatherOutput");
+
+        maincontent.removeChild(wHeader);
+        maincontent.removeChild(wContent);
       }
     })
     .catch((err) => console.log("There is no city like that!"));
@@ -75,7 +87,11 @@ button.addEventListener("click", function () {
     venueRequest.onload = function () {
       const venues = venueRequest.response.response.groups[0].items;
 
-      let parent = document.querySelector(".attr");
+      let attrOutput = document.createElement("div");
+      attrOutput.className = "attr";
+      let attrHeader = document.createElement("h1");
+      attrHeader.id = "hId";
+      attrHeader.innerHTML = "Attractions";
 
       for (let i = 0; i < 10; i++) {
         let venuePick = venues[i].venue;
@@ -86,21 +102,38 @@ button.addEventListener("click", function () {
         div.id = "attractions";
         attractions.innerHTML = venuePick.name;
 
+        maincontent.appendChild(attrHeader);
         div.appendChild(attractions);
-        parent.appendChild(div);
+        attrOutput.appendChild(div);
+        maincontent.appendChild(attrOutput);
         console.log(`${venuePick.name}`);
       }
     };
     venueRequest.send();
-  }
-  else{
-    alert('Press attraction checkbox to get attractions.')
+  } else {
+    alert("Press attraction checkbox to get attractions.");
+    let removeAttrHeader = document.querySelector("#hId");
+    let removeAttrOutput = document.querySelector(".attr");
+    maincontent.removeChild(removeAttrOutput);
+    maincontent.removeChild(removeAttrHeader);
   }
 });
 
 function removeAttr() {
+  let removeWeather = document.querySelectorAll("#weatherOutput");
+  let removeHeader = document.querySelectorAll("#hId");
   let topattr = document.querySelectorAll("#attractions");
+  let removeAttrDiv = document.querySelectorAll(".attr");
   for (var i = 0; i < topattr.length; i++) {
     topattr[i].remove();
+  }
+  for (var x = 0; x < removeWeather.length; x++) {
+    removeWeather[x].remove();
+  }
+  for (var y = 0; y < removeHeader.length; y++) {
+    removeHeader[y].remove();
+  }
+  for (var y = 0; y < removeAttrDiv.length; y++) {
+    removeAttrDiv[y].remove();
   }
 }
