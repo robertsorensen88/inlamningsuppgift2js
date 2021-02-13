@@ -16,6 +16,13 @@ today = yyyy + mm + dd;
 
 button.addEventListener("click", function () {
   removeAttr();
+  if (checkboxWeather.checked === false && checkboxattr.checked === false) {
+    let Nothing2show = document.createElement("h3");
+    Nothing2show.innerHTML =
+      "No information to display. Please, select an option";
+    Nothing2show.id = "noId";
+    maincontent.appendChild(Nothing2show);
+  }
   fetch(
     "https://api.openweathermap.org/data/2.5/weather?q=" +
       inputValue.value +
@@ -142,7 +149,8 @@ button.addEventListener("click", function () {
       } else {
         for (let i = 0; i < 10; i++) {
           let venuePick = venues[i].venue;
-          let venueIcon = venues[i].venue.categories[0].icon.prefix + "bg_32.png";
+          let venueIcon =
+            venues[i].venue.categories[0].icon.prefix + "bg_32.png";
           let venueAddress = venues[i].venue.location;
 
           let img = document.createElement("img");
@@ -186,6 +194,7 @@ function removeAttr() {
   let removeHeader = document.querySelectorAll("#hId");
   let topattr = document.querySelectorAll("#attractions");
   let removeAttrDiv = document.querySelectorAll(".attr");
+  let removeNoOptions = document.querySelectorAll("#noId");
   for (var i = 0; i < topattr.length; i++) {
     topattr[i].remove();
   }
@@ -197,5 +206,8 @@ function removeAttr() {
   }
   for (var y = 0; y < removeAttrDiv.length; y++) {
     removeAttrDiv[y].remove();
+  }
+  for (var y = 0; y < removeNoOptions.length; y++) {
+    removeNoOptions[y].remove();
   }
 }
