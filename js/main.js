@@ -15,7 +15,9 @@ var yyyy = String(today.getFullYear());
 today = yyyy + mm + dd;
 
 button.addEventListener("click", function () {
+
   removeElement();
+
   if (checkboxWeather.checked === false && checkboxattr.checked === false) {
     let Nothing2show = document.createElement("h3");
     Nothing2show.innerHTML =
@@ -23,6 +25,8 @@ button.addEventListener("click", function () {
     Nothing2show.id = "noId";
     maincontent.appendChild(Nothing2show);
   }
+
+  // Här hämtar jag min länk. beroende på inputvalue är.
   fetch(
     "https://api.openweathermap.org/data/2.5/weather?q=" +
       inputValue.value +
@@ -30,6 +34,7 @@ button.addEventListener("click", function () {
   )
     .then((response) => response.json())
     .then((data) => {
+      //hämtar ut data från webapin och lägger i variabler.
       let city = data["name"];
       let tempValue = data["main"]["temp"];
       let description = data["weather"][0]["description"];
@@ -37,6 +42,7 @@ button.addEventListener("click", function () {
       var iconurl = "http://openweathermap.org/img/w/" + icon + ".png";
 
       if (checkboxWeather.checked === true) {
+        //Om checkbox för väder är ikryssad. DOM sker.
         let weatherHeader = document.createElement("h1");
         let cityNames = document.createElement("h2");
         let temp = document.createElement("p");
@@ -62,7 +68,8 @@ button.addEventListener("click", function () {
         weatherOutput.appendChild(temp);
         weatherOutput.appendChild(desc);
         maincontent.appendChild(weatherOutput);
-      } else {
+      } else { 
+        // om det inte är ikryssat  alert. tar även bort header o content för vädret.
         alert("Press weather checkbox to get weather information.");
         let wHeader = document.querySelector("#whId");
         let wContent = document.querySelector("#weatherOutput");
@@ -71,14 +78,16 @@ button.addEventListener("click", function () {
         maincontent.removeChild(wContent);
       }
     })
-    .catch((err) => console.log("There is no city like that!"));
+    // om länken blir sker detta.
+    .catch((err) => alert("There is no city like that!"));
 
   // från Foursquare kontot
   const clientId = "USRPOYYJTDVVLZUFMHGNCGFUFLE3DEHF1B3H0DFECZWMVMH3";
   const clientSecret = "XOZUXEYZB3L50KZ2QQOG31A0WZ0LBBRO3WZFNPCRYHVM1G5N";
   const todaysDate = today;
   const cityName = inputValue.value;
-
+     
+  //länken tull foursquare. lägger in searchparams i länken.
   const venueUrl = new URL("https://api.foursquare.com/v2/venues/explore");
   venueUrl.searchParams.append("client_id", clientId);
   venueUrl.searchParams.append("client_secret", clientSecret);
@@ -87,11 +96,13 @@ button.addEventListener("click", function () {
   venueUrl.searchParams.append("limit", 10);
   console.log(venueUrl);
 
+ // Gör en request och hämtar ner i json.
   const venueRequest = new XMLHttpRequest();
   venueRequest.open("GET", venueUrl);
   venueRequest.responseType = "json";
 
   if (checkboxattr.checked === true) {
+    //om attr är checked hämtar vi data sedan använder vi oss av DOM för att få ut data.
     venueRequest.onload = function () {
       const venues = venueRequest.response.response.groups[0].items;
 
@@ -103,6 +114,7 @@ button.addEventListener("click", function () {
       let sortVenue = [];
       for (let i = 0; i < 10; i++) {
         sortVenue[i] = {
+          //skapar objekt. För att kunna sortera i bokstavsordning.
           Namn: venues[i].venue.name,
           Icon: venues[i].venue.categories[0].icon.prefix + "bg_32.png",
           Address: venues[i].venue.location,
@@ -110,6 +122,7 @@ button.addEventListener("click", function () {
         console.log(sortVenue[i]);
       }
       if (checkboxSort.checked === true) {
+        //sorterar om arrayen.
         sortVenue.sort(function (a, b) {
           var x = a.Namn.toLowerCase();
           var y = b.Namn.toLowerCase();
@@ -124,6 +137,7 @@ button.addEventListener("click", function () {
         console.log(sortVenue);
 
         for (let i = 0; i < 10; i++) {
+          // skriver ut array i bokstavsordning.
           let venuePick = sortVenue[i].Namn;
           let venueIcon = sortVenue[i].Icon;
           let venueAddress = sortVenue[i].Address;
@@ -147,6 +161,7 @@ button.addEventListener("click", function () {
           console.log(`${venuePick.name}`);
         }
       } else {
+        // skriver ut i vanliga ordningen.
         for (let i = 0; i < 10; i++) {
           let venuePick = venues[i].venue;
           let venueIcon =
@@ -190,6 +205,7 @@ checkboxSort.addEventListener("click", function () {
 });
 
 function removeElement() {
+  // tar bort element när man kallar på funktionen
   let removeWeather = document.querySelectorAll("#weatherOutput");
   let removeHeader = document.querySelectorAll("#hId");
   let topattr = document.querySelectorAll("#attractions");
