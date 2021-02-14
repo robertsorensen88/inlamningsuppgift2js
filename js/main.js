@@ -15,11 +15,11 @@ var yyyy = String(today.getFullYear());
 today = yyyy + mm + dd;
 
 button.addEventListener("click", function () {
-  removeAttr();
+  removeElement();
   if (checkboxWeather.checked === false && checkboxattr.checked === false) {
     let Nothing2show = document.createElement("h3");
     Nothing2show.innerHTML =
-      "No information to display. Please, select an option";
+      "No information to display. Please, select an option...";
     Nothing2show.id = "noId";
     maincontent.appendChild(Nothing2show);
   }
@@ -189,12 +189,13 @@ checkboxSort.addEventListener("click", function () {
   }
 });
 
-function removeAttr() {
+function removeElement() {
   let removeWeather = document.querySelectorAll("#weatherOutput");
   let removeHeader = document.querySelectorAll("#hId");
   let topattr = document.querySelectorAll("#attractions");
   let removeAttrDiv = document.querySelectorAll(".attr");
   let removeNoOptions = document.querySelectorAll("#noId");
+
   for (var i = 0; i < topattr.length; i++) {
     topattr[i].remove();
   }
